@@ -130,7 +130,7 @@ function uploadImage(req, res){
     if(req.files){
         var file_path = req.files.image.path;
         console.log({file_path});
-        var file_split = file_path.split("/");
+        var file_split = file_path.split('\\');
         console.log({file_split});
         var file_name  = file_split[2];
         var ext_split = file_name.split('\.');
@@ -154,9 +154,10 @@ function uploadImage(req, res){
 }
 
 function getImageFile(req, res){
-    var imagefile = req.params.imagefile;
-    var path_file = './uploads/artists/' + imagefile;
-    
+    var image_file = req.params.image;
+    console.log({image_file});
+    var path_file = './uploads/artists/' + image_file;
+    console.log({path_file});
     fs.exists(path_file, function(exists){
         if(exists){
             res.sendFile(path.resolve(path_file))

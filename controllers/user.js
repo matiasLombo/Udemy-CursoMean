@@ -6,12 +6,6 @@ var bcrypt = require('bcrypt-nodejs');
 var User = require('../models/user');
 var jwt = require('../services/jwt');
 
-function pruebas(req, res){
-    res.status(200).send({
-        message: 'Wenasssssss'
-    });
-}
-
 function saveUser(req, res){
     var user = new User();{}
     var params = req.body;
@@ -136,7 +130,6 @@ function getImageFile(req, res){
 }
 
 module.exports = {
-    pruebas,
     saveUser,
     loginUser,
     updateUser,
