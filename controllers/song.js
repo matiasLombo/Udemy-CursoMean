@@ -116,16 +116,16 @@ function uploadFile(req, res){
         var ext_split = file_name.split('\.');
         var file_ext = ext_split[1];
         
-        if (file_ext == 'png' || file_ext == 'jpg' || file_ext == 'gif') {
-            Song.findByIdAndUpdate(songId, {image: file_name}, (err, songUpdated) =>{
+        if (file_ext == 'mp3' || file_ext == 'ogg') {
+            Song.findByIdAndUpdate(songId, {file: file_name}, (err, songUpdated) =>{
                 if (!songUpdated) {
-                    res.status(404).send({message: 'No se pudo actualizar la imagen'});
+                    res.status(404).send({message: 'No se pudo actualizar la cancion'});
                 }else{
                     res.status(200).send({song: songUpdated});
                 }
             });
         }else{
-            res.status(200).send({message: 'Formato de imagen no soportado'});
+            res.status(200).send({message: 'Formato de audio no soportado'});
         }
 
     }else{
@@ -134,15 +134,15 @@ function uploadFile(req, res){
 }
 
 function getSongFile(req, res){
-    var image_file = req.params.image;
-    console.log({image_file});
-    var path_file = './uploads/songs/' + image_file;
+    var song_file = req.params.file;
+    console.log({song_file});
+    var path_file = './uploads/songs/' + song_file;
     console.log({path_file});
     fs.exists(path_file, function(exists){
         if(exists){
             res.sendFile(path.resolve(path_file))
         }else{
-            res.status(200).send({message: 'La imagen no existe'});
+            res.status(200).send({message: 'La archivo de audio no existe'});
         }
     })
 }
